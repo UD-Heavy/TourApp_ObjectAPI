@@ -1,6 +1,8 @@
 package ru.spring.API.ObjectAPITourAPP.contollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +25,10 @@ public class ObjectController {
     }
 
     @GetMapping("/tours")
-    public List<MapObject> getAllTours(@RequestParam(value = "count", required = false) Integer count){
-        return objectService.findAllTours(count);
+    public ResponseEntity<List<MapObject>> getAllTours(@RequestParam(value = "count", required = false) Integer count){
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(objectService.findAllTours(count));
     }
 
     @GetMapping("/news")
